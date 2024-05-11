@@ -6,6 +6,7 @@ const PORT = process.env.PORT || 4000;
 const URL = process.env.MONGO_URL;
 const bodyParser = require('body-parser');
 const cors = require('cors');
+const authRoute = require('./routes/user');
 
 
 app.get('/', (req, res) => {
@@ -14,7 +15,7 @@ app.get('/', (req, res) => {
 app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-
+app.use('/auth', authRoute);
 
 
 mongoose.connect(URL).then(() => {
