@@ -1,8 +1,9 @@
-POST http://localhost:3000/auth/login
+POST http://localhost:3000/post
 Content-Type: application/json
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjQzZTc5ZDliMjY2Y2Q5YTJhMTU1YTgiLCJpYXQiOjE3MTU3MjYzMzksImV4cCI6MTcxNTc2OTUzOX0.vJh5utZFdLJv_5aDH6lcYzhXHNIcKZialdiumDKXIGs
 
 {
-    "username" : "Oyemoyine",
-    "password" : "Sunday2666"
-
+    "title": "Test",
+    "content": "Test"
+    
 }

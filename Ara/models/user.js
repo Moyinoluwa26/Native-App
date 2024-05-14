@@ -30,7 +30,13 @@ const userSchema = new mongoose.Schema({
     },
     token: {
         type: String
-    }
+    },
+    posts: [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Post'
+        }
+    ]
 });
 
 const User = mongoose.model('User', userSchema);

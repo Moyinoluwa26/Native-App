@@ -7,6 +7,7 @@ const URL = process.env.MONGO_URL;
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const authRoute = require('./routes/user');
+const postRoute = require('./routes/post');
 
 
 app.get('/', (req, res) => {
@@ -16,6 +17,7 @@ app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use('/auth', authRoute);
+app.use('/post', postRoute);
 
 
 mongoose.connect(URL).then(() => {
