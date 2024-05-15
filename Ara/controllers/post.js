@@ -46,6 +46,33 @@ const getAllPosts = async (req, res) => {
     }
 };
 
+// Controller to get all posts by a specific user
+const getUserPosts = async (req, res) => {
+    try {
+        // Get the user ID from the request parameters
+        const userId = req.params.id;
+
+        // Find the user in the database by their ID
+        const user = await User.findOne({ _id: userId });
+
+        // If the user is not found, return a 404 error
+        if (!user) {
+            return res.status(404).json({ error: error.message });
+        }
+
+        // Find all posts associated with the user
+        const posts = await Post.find({ user: userId });
+        if (!posts) {
+            return res.status(404).json({ error: error.message });
+        }
+        // Return the posts as the response
+        res.json(posts);
+    } catch (error) {
+        // Handle any errors that occur during the process
+        res.status(500).json({ error: 'Failed to fetch user posts' });
+    }
+};
+
 // Controller to get a specific post by ID
 const getPostById = async (req, res) => {
     try {
@@ -73,9 +100,10 @@ const updatePostById = async (req, res) => {
     try {
         // Get the post ID from the request parameters
         const postId = req.params.id;
+        const { title, content } = req.body;
 
         // Find the post in the database by its ID
-        const post = await Post.findById(postId);
+        const post = await Post.findOne({ _id: postId });
 
         // If the post is not found, return a 404 error
         if (!post) {
@@ -83,8 +111,8 @@ const updatePostById = async (req, res) => {
         }
 
         // Update the post data with the new values
-        post.title = req.body.title;
-        post.content = req.body.content;
+        post.title = title;
+        post.content = content;
 
         // Save the updated post to the database
         const updatedPost = await post.save();
@@ -93,7 +121,7 @@ const updatePostById = async (req, res) => {
         res.json(updatedPost);
     } catch (error) {
         // Handle any errors that occur during the process
-        res.status(500).json({ error: 'Failed to update post' });
+        res.status(500).json({ error: error.message });
     }
 };
 
@@ -104,7 +132,7 @@ const deletePostById = async (req, res) => {
         const postId = req.params.id;
 
         // Find the post in the database by its ID
-        const post = await Post.findById(postId);
+        const post = await Post.findOne({ _id: postId });
 
         // If the post is not found, return a 404 error
         if (!post) {
@@ -112,7 +140,7 @@ const deletePostById = async (req, res) => {
         }
 
         // Delete the post from the database
-        await post.remove();
+        await post.deleteOne();
 
         // Return a success message as the response
         res.json({ message: 'Post deleted successfully' });
@@ -128,5 +156,6 @@ module.exports = {
     getAllPosts,
     getPostById,
     updatePostById,
-    deletePostById
+    deletePostById,
+    getUserPosts
 };

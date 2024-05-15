@@ -1,9 +1,7 @@
-POST http://localhost:3000/post
+PUT  http://localhost:3000/post/6643dfa19c4570cb972df2c6
 Content-Type: application/json
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjQzZTc5ZDliMjY2Y2Q5YTJhMTU1YTgiLCJpYXQiOjE3MTU3MjYzMzksImV4cCI6MTcxNTc2OTUzOX0.vJh5utZFdLJv_5aDH6lcYzhXHNIcKZialdiumDKXIGs
 
 {
-    "title": "Test",
-    "content": "Test"
-    
+  "title": "One and Half Post",
+  "content": "This is the post after one and before two."
 }
