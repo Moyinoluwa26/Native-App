@@ -1,4 +1,10 @@
-import React from 'react'
+import React from 'react';
+
+export const metadata = {
+    title: "The Product page",
+    description: " This is a page that views the Products available for sale ",
+    keywords: ["sales", "purchases", " down ", "etc"]
+}
 
 export default function Products() {
     return (<>
