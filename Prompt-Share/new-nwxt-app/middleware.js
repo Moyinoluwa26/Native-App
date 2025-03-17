@@ -1,11 +1,10 @@
 import { NextResponse } from "next/server";
-import { cookies } from 'next/headers';
+
 
 
 export async function middleware(req) {
     console.log("Middleware Running...");
-    const coky = await cookies();
-    coky.set('token', 'Bearer 14567');
+
 
 
 
